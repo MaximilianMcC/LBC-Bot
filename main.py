@@ -32,5 +32,11 @@ async def testCommand(ctx: interactions.CommandContext):
     await ctx.send("Among us😂😂😂")
 
 
+# Notices command
+@client.command(name="notices", description="Get the LBC daily notices", scope=guild_ids)
+async def noticeCommand(ctx: interactions.CommandContext):
+    await ctx.send("Daily Notices")
+
+
 # Start the bot
 client.start()

@@ -47,7 +47,7 @@ async def noticeCommand(ctx: interactions.CommandContext):
     noticesJson = json.loads(noticesString)
 
     # Make an embed
-    embed = interactions.Embed(title="Long Bay College Daily Notices", color=0x00597C)
+    noticesEmbeds = []
 
     # Loop through all the notices
     for notice in noticesJson["notices"]:
@@ -57,9 +57,13 @@ async def noticeCommand(ctx: interactions.CommandContext):
              notice["subtitle"] = ""
 
         # Add a new field with all of the info
-        embed.add_field(name=f"{notice['title']}\n{notice['subtitle']}", value=notice["content"], inline=False)
+        embed = interactions.Embed(title=notice["title"], color=0x00597C)
+        embed.add_field(name="📢 " + notice["subtitle"], value=notice["content"], inline=False)
+        noticesEmbeds.append(embed)
 
-    await ctx.send(embeds=embed)
+    await ctx.send(embeds=noticesEmbeds)
+
+
 
 # Morbin' time command
 @client.command(name="morb", description="It's Morbin' time", scope=guild_ids)
